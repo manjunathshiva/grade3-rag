@@ -55,7 +55,7 @@ DATA_DIR = "./data"  # directory containing the documents to index
 
 llm = LlamaCPP(
         #model_path=model_path,
-        model_url="https://huggingface.co/TheBloke/zephyr-7B-beta-GGUF/resolve/main/zephyr-7b-beta.Q8_0.gguf",
+        model_url="https://huggingface.co/TheBloke/zephyr-7B-beta-GGUF/resolve/main/zephyr-7b-beta.Q4_K_M.gguf",
         temperature=0.01,
         max_new_tokens=7000,
         context_window=8192,
