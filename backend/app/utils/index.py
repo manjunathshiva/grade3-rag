@@ -66,7 +66,7 @@ llm = LlamaCPP(
         verbose=True,
     )
 
-embed_model = HuggingFaceEmbedding(model_name="WhereIsAI/UAE-Large-V1",device="cpu")
+embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5",device="cpu")
 
 service_context = ServiceContext.from_defaults(
     llm=llm,
