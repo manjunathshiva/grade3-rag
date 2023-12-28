@@ -15,47 +15,15 @@ from llama_index.llms.llama_utils import (
     completion_to_prompt,
 )
 from llama_index import set_global_service_context
-# Import the prompt wrapper...but for llama index
-from llama_index.llms import HuggingFaceLLM
-from llama_index.prompts import PromptTemplate
 
-# Define a new prompt template
-template = """
-<|system|>
-Answer the question based on the context below. Keep the answer medium and concise. Respond "Unsure about answer" if not sure about the answer.
-</s>
-<|user|>
-Context: {context_str}
-Question: {query_str}
-Answer:
-</s>
-<|assistant|>
-"""
-# Throw together the query wrapper
-
-
-model_path = "/Volumes/FastSSD2/LLM/AIAnytime/manju/Llama2-Medical-Chatbot/models/zephyr-7b-beta.Q8_0.gguf"
 
 
 STORAGE_DIR = "./storage"  # directory to cache the generated index
 DATA_DIR = "./data"  # directory containing the documents to index
 
-#llm =  HuggingFaceLLM(
-#    model_name="Deci/DeciLM-6b-instruct",
-#    tokenizer_name="Deci/DeciLM-6b-instruct",
-#    query_wrapper_prompt=PromptTemplate("<|system|>\n</s>\n<|user|>\n{query_str}</s>\n<|assistant|>\n"),
-    # query_wrapper_prompt=PromptTemplate(template),
-#    context_window=4096,
-#    max_new_tokens=512,
-#    model_kwargs={'trust_remote_code':True},
-#    generate_kwargs={"temperature": 0.0},
-#    device_map="auto",
-#)
-
-
 llm = LlamaCPP(
         #model_path=model_path,
-        model_url="https://huggingface.co/TheBloke/zephyr-7B-beta-GGUF/resolve/main/zephyr-7b-beta.Q4_K_M.gguf",
+        model_url="https://huggingface.co/TheBloke/stablelm-zephyr-3b-GGUF/resolve/main/stablelm-zephyr-3b.Q4_K_M.gguf",
         temperature=0.01,
         max_new_tokens=7000,
         context_window=8192,
@@ -66,7 +34,7 @@ llm = LlamaCPP(
         verbose=True,
     )
 
-embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5",device="cpu")
+embed_model = HuggingFaceEmbedding(model_name="WhereIsAI/UAE-Large-V1",device="cpu")
 
 service_context = ServiceContext.from_defaults(
     llm=llm,
