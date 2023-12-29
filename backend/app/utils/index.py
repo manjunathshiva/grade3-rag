@@ -8,30 +8,30 @@ from llama_index import (
     load_index_from_storage,
     ServiceContext,
 )
-from llama_index.llms import LlamaCPP
+
+from langchain.llms import HuggingFaceHub
 from llama_index.embeddings import HuggingFaceEmbedding
-from llama_index.llms.llama_utils import (
-    messages_to_prompt,
-    completion_to_prompt,
-)
 from llama_index import set_global_service_context
 
 
-
+HUGGINGFACEHUB_API_TOKEN = os.environ.get("HUGGINGFACEHUB_API_TOKEN")
 STORAGE_DIR = "./storage"  # directory to cache the generated index
 DATA_DIR = "./data"  # directory containing the documents to index
 
-llm = LlamaCPP(
-        #model_path=model_path,
-        model_url="https://huggingface.co/TheBloke/stablelm-zephyr-3b-GGUF/resolve/main/stablelm-zephyr-3b.Q4_K_M.gguf",
-        temperature=0.01,
-        max_new_tokens=7000,
-        context_window=8192,
-        generate_kwargs={},
-        #model_kwargs={"n_gpu_layers": 1},
-        messages_to_prompt=messages_to_prompt,
-        completion_to_prompt=completion_to_prompt,
-        verbose=True,
+llm = HuggingFaceHub(
+                    repo_id='HuggingFaceH4/zephyr-7b-beta',
+                    model_kwargs={"temperature":0.01, 
+                     "do_sample":True, 
+                    # "top_k":10, 
+                    # "top_p":0.95, 
+                    # "num_return_sequences":1, 
+                    # "max_length":3900,
+                     "max_new_tokens":4096,
+                     "context_size":8192,
+                     "repetition_penalty":1.3,
+                   #  "length_penalty":1.0,
+                   #  "early_stopping":False
+                    }
     )
 
 embed_model = HuggingFaceEmbedding(model_name="WhereIsAI/UAE-Large-V1",device="cpu")
