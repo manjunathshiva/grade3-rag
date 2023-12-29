@@ -13,6 +13,7 @@ llama-index = "^0.8.56"
 pypdf = "^3.17.0"
 python-dotenv = "^1.0.0"
 llama-cpp-python = "^0.2.26"
+huggingface_hub = "^0.20.1"
 
 
 [build-system]
