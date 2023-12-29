@@ -2,7 +2,7 @@
   "name": "grade3",
   "version": "0.1.0",
   "scripts": {
-    "dev": "NEXT_PUBLIC_CHAT_API=http://localhost:8000/api/chat next dev",
+    "dev": "NEXT_PUBLIC_CHAT_API=http://ec2-34-209-150-61.us-west-2.compute.amazonaws.com:8000/api/chat next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
