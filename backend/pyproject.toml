@@ -15,6 +15,13 @@ python-dotenv = "^1.0.0"
 llama-cpp-python = "^0.2.26"
 huggingface_hub = "^0.20.1"
 transformers = "^4.36.2"
+torch = "^2.1.2"
+accelerate = "^0.25.0"
+torchaudio = "^2.1.2"
+torchvision = "^0.16.2"
+
+
+
 
 
 [build-system]
