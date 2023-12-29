@@ -26,15 +26,15 @@ llm = HuggingFaceHub(
                     # "top_p":0.95, 
                     # "num_return_sequences":1, 
                     # "max_length":3900,
-                     "max_new_tokens":4096,
-                     "context_size":8192,
+                     "max_new_tokens":3500,
+                     "context_size":4096,
                      "repetition_penalty":1.3,
                    #  "length_penalty":1.0,
                    #  "early_stopping":False
                     }
     )
 
-embed_model = HuggingFaceEmbedding(model_name="WhereIsAI/UAE-Large-V1",device="cpu")
+embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5",device="cpu")
 
 service_context = ServiceContext.from_defaults(
     llm=llm,
