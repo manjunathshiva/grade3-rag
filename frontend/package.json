@@ -4,8 +4,8 @@
   "scripts": {
     "dev": "NEXT_PUBLIC_CHAT_API=http://ec2-34-209-150-61.us-west-2.compute.amazonaws.com:8000/api/chat next dev",
     "build": "NEXT_PUBLIC_CHAT_API=http://ec2-34-209-150-61.us-west-2.compute.amazonaws.com:8000/api/chat next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "NEXT_PUBLIC_CHAT_API=http://ec2-34-209-150-61.us-west-2.compute.amazonaws.com:8000/api/chat next start",
+    "lint": "NEXT_PUBLIC_CHAT_API=http://ec2-34-209-150-61.us-west-2.compute.amazonaws.com:8000/api/chat next lint"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
