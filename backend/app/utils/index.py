@@ -60,14 +60,15 @@ storage_context = StorageContext.from_defaults(
 # And set the service context
 set_global_service_context(service_context)
 
-logger = logging.getLogger("uvicorn")
-logger.info("Creating new index")
-# load the documents and create the index
-documents = SimpleDirectoryReader(DATA_DIR).load_data()
-index = VectorStoreIndex.from_documents(documents,storage_context=storage_context,service_context=service_context)
-# store it for later
-index.storage_context.persist(STORAGE_DIR)
-logger.info(f"Finished creating new index. Stored in {STORAGE_DIR}")
+if not os.path.exists(STORAGE_DIR + "/collections/grade3"):
+    logger = logging.getLogger("uvicorn")
+    logger.info("Creating new index")
+    # load the documents and create the index
+    documents = SimpleDirectoryReader(DATA_DIR).load_data()
+    index = VectorStoreIndex.from_documents(documents,storage_context=storage_context,service_context=service_context)
+    # store it for later
+    index.storage_context.persist(STORAGE_DIR)
+    logger.info(f"Finished creating new index. Stored in {STORAGE_DIR}")
 
 def get_index():
     logger = logging.getLogger("uvicorn")
