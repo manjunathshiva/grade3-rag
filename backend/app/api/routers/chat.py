@@ -44,6 +44,9 @@ async def chat(
     # query chat engine
     chat_engine = index.as_query_engine(
         chat_mode="context",
+        sparse_top_k=12,
+        vector_store_query_mode="hybrid",
+        similarity_top_k=2,
         system_prompt=(
          "You are a chatbot, able to have normal interactions, as well as talk"
          " about an Grade 3 Unit Tests, Holidays and Dairy of the School."
