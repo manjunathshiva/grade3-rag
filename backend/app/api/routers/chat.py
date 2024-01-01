@@ -70,7 +70,7 @@ async def chat(
     # query chat engine
     chat_engine = index.as_query_engine(
         #chat_mode="context",
-        text_qa_template=text_qa_template,
+        #text_qa_template=text_qa_template,
         sparse_top_k=12,
         vector_store_query_mode="hybrid",
         similarity_top_k=2,
