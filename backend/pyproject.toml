@@ -20,6 +20,7 @@ accelerate = "^0.25.0"
 torchaudio = "^2.1.2"
 torchvision = "^0.16.2"
 qdrant-client = "^1.7.0"
+bitsandbytes = "^0.41.3.post2"
 
 
 [build-system]
