@@ -62,17 +62,21 @@ quantization_config = BitsAndBytesConfig(
     bnb_4bit_use_double_quant=True,
 )
 
+system_promt = """
+<|system|> Always answer the question, even if the context isn't helpful</s>
+"""
+
 llm = HuggingFaceLLM(
     model_name="HuggingFaceH4/zephyr-7b-beta",
     tokenizer_name="HuggingFaceH4/zephyr-7b-beta",
     query_wrapper_prompt=PromptTemplate("<|system|>\n</s>\n<|user|>\n{query_str}</s>\n<|assistant|>\n"),
-    context_window=3900,
+    system_prompt=system_promt,
+    context_window=4096,
     max_new_tokens=3500,
     model_kwargs={"quantization_config": quantization_config},
     # tokenizer_kwargs={},
     generate_kwargs={"temperature": 0.01, "top_k": 50, "do_sample" : True},
     messages_to_prompt=messages_to_prompt,
-    device_map="auto",
 )
 
 embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5",device=DEVICE)
