@@ -3,8 +3,34 @@ from typing import List
 from app.utils.index import get_index
 from fastapi import APIRouter, Depends, HTTPException, status
 from llama_index import VectorStoreIndex
-from llama_index.llms.base import MessageRole, ChatMessage
+from llama_index.llms.base import MessageRole
 from pydantic import BaseModel
+from llama_index.llms import ChatMessage, MessageRole
+from llama_index.prompts import ChatPromptTemplate
+
+
+# Text QA Prompt
+chat_text_qa_msgs = [
+    ChatMessage(
+        role=MessageRole.SYSTEM,
+        content=(
+            "<|system|>Always answer the question, even if the context isn't helpful.</s>"
+        ),
+    ),
+    ChatMessage(
+        role=MessageRole.USER,
+        content=(
+            "<|user|>Context information is below.\n"
+            "---------------------\n"
+            "{context_str}\n"
+            "---------------------\n"
+            "Given the context information and not prior knowledge, "
+            "answer the question: {query_str}\n"
+            "</s><|assistant|>"
+        ),
+    ),
+]
+text_qa_template = ChatPromptTemplate(chat_text_qa_msgs)
 
 
 chat_router = r = APIRouter()
@@ -43,14 +69,11 @@ async def chat(
 
     # query chat engine
     chat_engine = index.as_query_engine(
-        chat_mode="context",
+        #chat_mode="context",
+        text_qa_template=text_qa_template,
         sparse_top_k=12,
         vector_store_query_mode="hybrid",
         similarity_top_k=2,
-        system_prompt=(
-         "You are a chatbot, able to have normal interactions, as well as talk"
-         " about an Grade 3 Unit Tests, Holidays and Dairy of the School."
-        ),
         verbose=False,
     )
     response = chat_engine.query( lastMessage.content)
